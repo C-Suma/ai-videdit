@@ -1,25 +1,31 @@
-import logo from './logo.svg';
+import React, { useRef, useEffect } from 'react';
+import { extractFrames } from './frameExtractor';
 import './App.css';
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+    const canvasRef = useRef(null);
+
+    useEffect(() => {
+        const abortController = new AbortController();
+
+        extractFrames(
+            'http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4',
+            canvasRef.current,
+            abortController.signal
+        );
+
+        return () => {
+            abortController.abort();
+        };
+    }, []);
+
+    return (
+        <div className="App">
+            <header className="App-header">
+                <canvas ref={canvasRef} />
+            </header>
+        </div>
+    );
 }
 
 export default App;
