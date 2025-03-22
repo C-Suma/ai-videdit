@@ -1,3 +1,4 @@
+//frameExtractor
 import { fetchFile } from '@ffmpeg/util';
 const { createFFmpeg } = require('@ffmpeg/ffmpeg/dist/umd/ffmpeg.js'); // Use UMD build
 
@@ -44,5 +45,3 @@ export const extractFrames = async (videoUrl, outputCanvas, signal) => {
         ffmpeg.FS('unlink', `frame-000${i}.jpg`);
     }
 };
-
-//test
