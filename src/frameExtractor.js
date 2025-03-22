@@ -44,3 +44,5 @@ export const extractFrames = async (videoUrl, outputCanvas, signal) => {
         ffmpeg.FS('unlink', `frame-000${i}.jpg`);
     }
 };
+
+//test
